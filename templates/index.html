@@ -3,39 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coming Soon</title>
-  <link rel="stylesheet" href="../static/style.css">
+  <title>Coming Soon | Jayesh Hadiya</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
   <div class="container">
-    <h1>Coming Soon</h1>
-    <p>Our website is under construction.<br>We'll be here soon with something amazing!</p>
-    <div class="countdown">
-      <div><span id="days">00</span><p>Days</p></div>
-      <div><span id="hours">00</span><p>Hours</p></div>
-      <div><span id="minutes">00</span><p>Minutes</p></div>
-      <div><span id="seconds">00</span><p>Seconds</p></div>
+    <h1>🚀 Coming Soon</h1>
+    <p>We're building something amazing. Stay tuned!</p>
+
+    <!-- Flash messages (from Flask) -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="flash-message">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Countdown timer -->
+    <div class="countdown" id="countdown">
+      <div class="time-box">
+        <h2 id="days">00</h2><span>Days</span>
+      </div>
+      <div class="time-box">
+        <h2 id="hours">00</h2><span>Hours</span>
+      </div>
+      <div class="time-box">
+        <h2 id="minutes">00</h2><span>Minutes</span>
+      </div>
+      <div class="time-box">
+        <h2 id="seconds">00</h2><span>Seconds</span>
+      </div>
     </div>
-    <footer>©2025 Shopygram</footer>
+
+    <!-- Email form -->
+    <div class="notify">
+      <form action="/subscribe" method="POST">
+        <input type="email" name="email" placeholder="Enter your email" required />
+        <button type="submit">Notify Me</button>
+      </form>
+    </div>
   </div>
+
+  <footer>© 2025 Shopygram | All Rights Reserved</footer>
 
   <script>
     // Countdown Timer
-    const targetDate = new Date("Dec 31, 2025 00:00:00").getTime();
-    const timer = setInterval(() => {
+    const countdown = () => {
+      const endDate = new Date("Dec 31, 2025 23:59:59").getTime();
       const now = new Date().getTime();
-      const distance = targetDate - now;
+      const gap = endDate - now;
 
-      document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-      document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+      const second = 1000;
+      const minute = second * 60;
+      const hour = minute * 60;
+      const day = hour * 24;
 
-      if (distance < 0) {
-        clearInterval(timer);
-        document.querySelector(".countdown").innerHTML = "We are live!";
-      }
-    }, 1000);
+      const d = Math.floor(gap / day);
+      const h = Math.floor((gap % day) / hour);
+      const m = Math.floor((gap % hour) / minute);
+      const s = Math.floor((gap % minute) / second);
+
+      document.getElementById("days").innerText = d;
+      document.getElementById("hours").innerText = h;
+      document.getElementById("minutes").innerText = m;
+      document.getElementById("seconds").innerText = s;
+    };
+
+    setInterval(countdown, 1000);
   </script>
 </body>
 </html>
