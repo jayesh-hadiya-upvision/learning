@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return "Hello from Flask CI/CD Render App!"
+    return render_template('index.html')
 
 @app.route('/health')
 def health():
