@@ -3,52 +3,52 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Coming Soon | Jayesh Hadiya</title>
+  <title>Jayesh Hadiya | Coming Soon</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-  <div class="container">
-    <h1>🚀 Coming Soon</h1>
-    <p>We're building something amazing. Stay tuned!</p>
+  <div class="wrapper">
+    <div class="content">
+      <h1>✨ Something Exciting Is Coming!</h1>
+      <p>We’re working hard to bring you something extraordinary. Stay tuned for the reveal!</p>
 
-    <!-- Flash messages (from Flask) -->
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        {% for message in messages %}
-          <div class="flash-message">{{ message }}</div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
+      <!-- Countdown Timer -->
+      <div class="countdown">
+        <div class="circle">
+          <h2 id="days">00</h2><span>Days</span>
+        </div>
+        <div class="circle">
+          <h2 id="hours">00</h2><span>Hours</span>
+        </div>
+        <div class="circle">
+          <h2 id="minutes">00</h2><span>Minutes</span>
+        </div>
+        <div class="circle">
+          <h2 id="seconds">00</h2><span>Seconds</span>
+        </div>
+      </div>
 
-    <!-- Countdown timer -->
-    <div class="countdown" id="countdown">
-      <div class="time-box">
-        <h2 id="days">00</h2><span>Days</span>
-      </div>
-      <div class="time-box">
-        <h2 id="hours">00</h2><span>Hours</span>
-      </div>
-      <div class="time-box">
-        <h2 id="minutes">00</h2><span>Minutes</span>
-      </div>
-      <div class="time-box">
-        <h2 id="seconds">00</h2><span>Seconds</span>
-      </div>
-    </div>
-
-    <!-- Email form -->
-    <div class="notify">
-      <form action="/subscribe" method="POST">
-        <input type="email" name="email" placeholder="Enter your email" required />
-        <button type="submit">Notify Me</button>
+      <!-- Email Notify -->
+      <form class="notify" action="/subscribe" method="POST">
+        <input type="email" name="email" placeholder="Your email address" required />
+        <button type="submit">Get Notified</button>
       </form>
+
+      <!-- Flask Flash Messages -->
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+            <div class="flash">{{ message }}</div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
     </div>
+
+    <footer>© 2025 Jayesh Hadiya | All Rights Reserved</footer>
   </div>
 
-  <footer>© 2025 Shopygram | All Rights Reserved</footer>
-
   <script>
-    // Countdown Timer
+    // Countdown Script
     const countdown = () => {
       const endDate = new Date("Dec 31, 2025 23:59:59").getTime();
       const now = new Date().getTime();
